@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+
+body, section, div, h1, h2, h3, p, span {
+  transition: background-color 1.2s ease, color 1.2s ease, border-color 1.2s ease;
+}
+
+body {
+  background-color: var(--bg-site);
+  color: var(--texto-principal);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Teachers', sans-serif;
+}
+
+nav {
+  background-color: #fda2f9 !important;
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-collapse {
+  flex-grow: 0 !important;
+}
+
+.banner {
+    height: 70vh;
+
+}
+
+#avatar{
+    width:420px;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-style: preserve-3d;
+}
+
+#avatar svg{
+    width:100%;
+    height:auto;
+}
+
+#left-eye-curious,
+#right-eye-curious,
+#left-eyebrow-curious,
+#right-eyebrow-curious,
+#left-eyebrow-normal,
+#right-eyebrow-normal
+{
+    transition: transform 1s ease;
+}
+
+#left-eye-normal, #right-eye-normal, #left-eyebrow-normal, #right-eyebrow-normal {
+  transform-origin: center !important;
+  will-change: transform;
+  /* Garante o amortecimento orgânico sutil de 0.06 segundos */
+  transition: transform 0.06s ease-out !important; 
+}
+
+.helloWord {
+    font-family: monospace;
+    display: inline-block;
+    margin-left: 2px; /* Pequeno espaço entre o texto e o cursor */
+    font-size: 5rem;
+    transition: font-size 1.2s ease-out;
+}
+
+.hello-world-cursor {
+    font-size: 5rem;
+}
+
+.bota-cursor {
+  animation: piscar 0.7s step-end infinite;
+  font-family: monospace;
+  display: inline-block;
+  margin-left: 2px; /* Pequeno espaço entre o texto e o cursor */
+  color: #dd74d8;
+}
+
+@keyframes piscar {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.botaoRoxo {
+    background-color: #bd28f8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10vw;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.botaoRoxo:hover {
+    background-color: #a01ed1;
+    color: #fff;
+}
+
+.lanterna-container {
+    position: absolute;
+    bottom: -10px; /* Começa escondida abaixo */
+    right: -500px !important; /* Força o alinhamento no extremo canto direito */
+    width: 90px;
+    height: 120px;
+    z-index: 1;
+    will-change: transform;
+}
+
+/* Brilho expandido em formato de névoa atrás do SVG */
+.lanterna-brilho-aura {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -50px;
+    bottom: -30px;
+    background: radial-gradient(circle, rgba(255,170,0,0.35) 0%, rgba(255,69,0,0) 70%);
+    z-index: 1;
+    pointer-events: none;
+    width: 10vw;
+    height: auto;
+}
+
+.secao-scroll-wrapper {
+  height: 650vh; 
+  position: relative;
+}
+
+/* Trava a seção APÓS ela subir um pouco (ajuste o -80px se quiser que suba mais ou menos) */
+.sticky-section {
+  position: sticky;
+  top: 10px; 
+  height: 100vh; 
+  padding-top: 90px !important; /* Afasta o título para ele não sumir atrás da navbar */
+  margin: 0 !important;
+  overflow: hidden;
+}
+
+#lantern-container {
+  position: relative;
+  z-index: 2; /* Garante que fiquem acima de fundos ou decorações */
+}
+
+/* 1. Balanço lateral (Apenas no eixo X e rotação) */
+@keyframes balancoLanterna {
+  0% { transform: translateX(0px) rotate(0deg); }
+  50% { transform: translateX(12px) rotate(3deg); }   /* Desvia suavemente para o lado */
+  100% { transform: translateX(0px) rotate(0deg); }
+}
+
+
+/* --- ESTILIZAÇÃO DO CARD INTERNO --- */
+.lantern {
+    width: 40vw;
+  min-height: 25vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+  
+  background: linear-gradient(to bottom, #fffae0, #ffcc44, #ff9900);
+  border-radius: 20px 20px 10px 10px; /* Bordas arredondadas proporcionais */
+  
+  
+  /* Sombra gigante e intensa (Efeito Super Glow) */
+  box-shadow: 
+    0 0 50px #ffaa00, 
+    0 0 120px rgba(255, 153, 0, 0.8),
+    0 0 200px rgba(255, 102, 0, 0.5),
+    inset 0 -20px 40px rgba(230, 92, 0, 0.5); /* Brilho interno na base */
+    
+  opacity: 0.95;
+  padding: 1.5rem !important;
+  
+  animation: balancoLanterna 6s infinite ease-in-out;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+}
+
+.lantern img {
+  max-width: 20vw;
+  height: auto;
+  border-radius: 10px;
+}
+
+.lanterna-brilho-aura {
+  position: absolute;
+  /* Expande o gradiente para muito além dos limites da lanterna */
+  top: -20vw;
+  left: -20vw;
+  right: -20vw;
+  bottom: -20vw;
+  /* Gradiente radial gigante e ultra suave */
+  background: radial-gradient(circle, rgba(255, 200, 0, 0.6) 0%, rgba(255, 100, 0, 0.2) 50%, rgba(255, 69, 0, 0) 75%);
+  z-index: -1; /* Fica atrás da lanterna para não cobrir o Sol de Corona */
+  pointer-events: none;
+  opacity: 0; /* Começa totalmente apagada */
+  transform: scale(0.8);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+/* --- ELEMENTO EXTERNO QUE O JAVASCRIPT MOVE --- */
+.lantern-item {
+    height: 35vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  opacity: 0;
+  transform: translateY(450px);
+  will-change: transform, opacity;
+}
+
+
+.lantern:hover {
+   box-shadow: 
+    0 0 50px #ffcc44, 
+    0 0 120px #ff9900, 
+    0 0 250px rgba(255, 153, 0, 0.8),
+    inset 0 -20px 40px rgba(230, 92, 0, 0.5);
+}
+
+.teste {
+    height: 300vh;
+}
