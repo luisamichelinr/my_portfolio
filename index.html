@@ -2,30 +2,186 @@
 <html lang="en">
 
 <head>
+    <script>
+        document.documentElement.classList.add("intro-pending");
+        window.introFallback = setTimeout(() => document.documentElement.classList.remove("intro-pending"), 8000);
+    </script>
+    <noscript><style>.navbar.fixed-top .navbar-collapse.collapse { display: block; } .navbar-toggler { display: none; } .navbar.fixed-top { position: static; } body > header { height: auto; }</style></noscript>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luísa Michelin</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Luísa Michelin Riqueti</title>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css?v=20261112-11">
+    <!-- Navigation and photo composition adjustments scoped to this version. -->
+    <style>
+        /* Keep all portfolio sections reachable without crowding the navbar. */
+        .navbar.fixed-top .container-fluid {
+            margin-left: 0 !important;
+            padding-inline: clamp(1rem, 2.6vw, 2.5rem);
+            gap: 0.85rem;
+        }
+        .navbar.fixed-top .navbar-brand {
+            flex-shrink: 0;
+            margin-right: auto;
+            font-size: clamp(0.95rem, 1.25vw, 1.13rem);
+            white-space: nowrap;
+        }
+        .navbar.fixed-top .navbar-collapse {
+            flex-grow: 0;
+        }
+        .navbar.fixed-top .navbar-nav {
+            align-items: center;
+            gap: clamp(0.05rem, 0.25vw, 0.35rem);
+        }
+        .navbar.fixed-top .navbar-nav .nav-link {
+            display: block;
+            padding: 0.5rem 0.33rem !important;
+            color: #382b3c;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: clamp(0.76rem, 0.87vw, 0.88rem);
+            font-weight: 500;
+            line-height: 1.35;
+            text-align: left;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .navbar.fixed-top .navbar-nav .nav-link:hover,
+        .navbar.fixed-top .navbar-nav .nav-link:focus-visible {
+            color: #74286f;
+            text-decoration: underline;
+            text-underline-offset: 0.28em;
+        }
+        .navbar.fixed-top .navbar-nav .nav-link:focus-visible {
+            outline: 2px solid #74286f;
+            outline-offset: 3px;
+        }
+        @media (max-width: 1399.98px) {
+            .navbar.fixed-top .navbar-brand { font-size: 1rem; }
+            .navbar.fixed-top .navbar-collapse {
+                flex-basis: 100%;
+                width: 100%;
+                margin-left: 0 !important;
+                max-height: min(72dvh, 36rem);
+                overflow-y: auto;
+            }
+            .navbar.fixed-top .navbar-nav {
+                align-items: stretch;
+                gap: 0.15rem;
+                padding: 0.55rem 0 0.75rem;
+            }
+            .navbar.fixed-top .navbar-nav .nav-link {
+                font-size: 1rem;
+                padding: 0.55rem 0.45rem !important;
+            }
+        }
+        @media (max-width: 390px) {
+            .navbar.fixed-top .navbar-brand { font-size: 0.9rem; }
+        }
+
+        /* Tocando photos: a restrained overlapping 'polaroid', like the robotics intro. */
+        .tocando-intro-photos {
+            position: relative;
+            display: block;
+            isolation: isolate;
+            width: 100%;
+            min-width: 0;
+            min-height: 0 !important;
+            padding: 0 clamp(0.9rem, 2vw, 1.6rem) 1.1rem 0;
+            overflow: visible;
+            align-self: center;
+        }
+        .tocando-intro-photos > .tocando-main-photo {
+            display: block;
+            width: 100%;
+            height: auto !important;
+            min-height: 0 !important;
+            aspect-ratio: 1280 / 852;
+            padding: 0 !important;
+            overflow: hidden;
+            border: 0 !important;
+            border-radius: 0.35rem;
+            background: transparent;
+            box-shadow: 12px 12px 0 rgba(212, 162, 253, 0.12);
+        }
+        .tocando-intro-photos > .tocando-main-photo > img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover !important;
+            object-position: center !important;
+        }
+        .tocando-intro-photos > .tocando-accent-photo {
+            position: absolute !important;
+            top: -0.8rem !important;
+            right: 2rem !important;
+            bottom: auto !important;
+            left: auto !important;
+            z-index: 2;
+            display: block;
+            width: clamp(8rem, 14vw, 11.5rem);
+            height: auto !important;
+            min-height: 0 !important;
+            aspect-ratio: 4 / 3;
+            padding: 0 !important;
+            overflow: hidden;
+            border: 5px solid #fffefa;
+            border-radius: 0.25rem;
+            background: transparent;
+            box-shadow: 8px 10px 22px rgba(45, 38, 48, 0.16);
+            transform: rotate(3deg);
+        }
+        .tocando-intro-photos > .tocando-accent-photo > img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover !important;
+            object-position: center !important;
+        }
+        @media (max-width: 767.98px) {
+            .tocando-intro-photos {
+                margin-top: 1.25rem;
+                padding: 0 0.7rem 0.9rem 0;
+            }
+            .tocando-intro-photos > .tocando-accent-photo {
+                top: -0.45rem !important;
+                right: 1.8rem !important;
+                width: clamp(6.7rem, 29vw, 9.25rem);
+                border-width: 4px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="pb-5">
-        <nav class="navbar navbar-expand-lg fixed-top d-flex justify-content-between">
-            <div class="container-fluid ms-5">
-                <a class="navbar-brand" href="#">Luísa Michelin Riqueti</a>
+    <header>
+        <nav class="navbar navbar-expand-xxl fixed-top" aria-label="Portfolio sections">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#home" data-luli-touch-trigger>Luísa Michelin Riqueti</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                    aria-label="Show portfolio sections">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse ms-2" id="navbarNavAltMarkup">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="#">My floating lanterns</a>
-                        <a class="nav-link" href="#">Mundo</a>
-                        <a class="nav-link" href="#">Cultura</a>
-                        <a class="nav-link" href="#">Colunas</a>
+                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link" href="#lanterns-opening">My floating lanterns</a>
+                        <a class="nav-link" href="#robotics">Robotics</a>
+                        <a class="nav-link" href="#tocando">Tocando em Frente</a>
+                        <a class="nav-link" href="#school-voice">School Voice</a>
+                        <a class="nav-link" href="#systems">Projects</a>
+                        <a class="nav-link" href="#theater">Theater</a>
+                        <a class="nav-link" href="#milestones">Milestones</a>
+                        <a class="nav-link" href="#currently-curious">Currently Curious</a>
+                        <button class="nav-link" type="button" data-open-luli-shelf
+                                aria-haspopup="dialog" aria-controls="luli-drawer">Luli's Shelf</button>
+                        <a class="nav-link" href="#closing">Closing</a>
                     </div>
                 </div>
             </div>
@@ -33,8 +189,8 @@
     </header>
 
 
-    <main class="pt-5 container-fluid">
-        <section class="row banner">
+    <main class="container-fluid">
+        <section class="row banner" id="home">
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
                 <div id="avatar">
                     <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,79 +295,1180 @@
             </div>
             <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-start">
                 <h2>
-                    <span id="hello-world" class="helloWord"></span><span id="cursor-hello"
+                    <span id="hello-world" class="helloWord">Hello world!</span><span id="cursor-hello"
                         class="bota-cursor hello-world-cursor">|</span>
                 </h2>
 
-                <h1 class="mt-3 d-none" id="name">
+                <h1 class="mt-3" id="name">
                     I'm Luísa Michelin Riqueti
                 </h1>
 
                 <p class="fs-4 text-muted">
-                    <span id="texto"></span><span id="cursor-texto" class="bota-cursor d-none">|</span>
+                    <span id="texto">I like working on things that make me learn something new, whether that is a program, a research question, or a project with other people.</span><span id="cursor-texto" class="bota-cursor d-none">|</span>
                 </p>
 
-                <a class="botaoRoxo d-none" id="buttonPurple" href="#secao-lanternas">Check out my story</a>
+                <a class="botaoRoxo" id="buttonPurple" href="#lanterns-opening">Explore my story</a>
             </div>
         </section>
-        <section class="secao-scroll-wrapper">
-
-            <div class="row sticky-section" id="secao-lanternas">
-                <div class="col-12 text-center d-flex flex-column">
-                    <div>
-                        <h2 class="display-3 fw-bold text-warning">My floating lanterns</h2>
-                    </div>
-
-                    <div id="lantern-container" class="row mt-5 w-100 mx-0">
-
-                        <div class="col-12 col-md-6 lantern-item">
-                            <div class="lantern ">
-                                <img src="img/baby.jpg" alt="A photo of me as a baby playing with a keyboard">
-                                <span>I was born in Campinas, but I moved around a lot; in fact, I never attended the same school for more than a year until I was 9 years old</span>
+        <div class="lantern-story" id="secao-lanternas" role="region" aria-labelledby="lanterns-title">
+        <section class="lantern-opening" id="lanterns-opening" aria-labelledby="lanterns-title" data-lantern-chapter="1">
+            <div class="lantern-opening-stage">
+                <div class="opening-sky" aria-hidden="true">
+                    <span class="sky-lantern sky-lantern-1"></span>
+                    <span class="sky-lantern sky-lantern-2"></span>
+                    <span class="sky-lantern sky-lantern-3"></span>
+                    <span class="sky-lantern sky-lantern-4"></span>
+                    <span class="sky-lantern sky-lantern-5"></span>
+                    <span class="sky-lantern sky-lantern-6"></span>
+                </div>
+                <div class="opening-content">
+                    <h2 id="lanterns-title">My floating lanterns</h2>
+                    <article class="opening-memory" aria-labelledby="luli-title">
+                        <figure class="opening-photo">
+                            <img src="img/baby.jpg" width="1280" height="960" alt="Luísa as a baby playing with a keyboard" decoding="async">
+                        </figure>
+                        <div class="opening-copy">
+                            <h3 id="luli-title">Luliês</h3>
+                            <p>When I was little, I mispronounced so many words that my family called my way of speaking <span lang="pt-BR">Luliês</span>, name inspired by my nickname, Luli. My mom was usually the only one who could understand what I was trying to say.</p>
+                            <p>I went to speech therapy when I was approximately two to four years old.</p>
+                        </div>
+                    </article>
+                    <details class="lantern-origin">
+                        <summary>Rapunzel</summary>
+                        <div class="lantern-origin-content">
+                            <!-- PHOTO · Photograph from Luísa's fourth birthday with a Rapunzel theme to be added -->
+                            <div class="asset-placeholder photo-slot"><img src="img/childhood-rapunzel-birthday.jpeg" alt="Luísa behind a birthday table decorated with Rapunzel pictures" loading="lazy" decoding="async" width="1600" height="1200" style="object-fit: contain; object-position: 50% 50%;"></div>
+                            <div>
+                                <p>Rapunzel was my favorite princess when I was little. I even had a Rapunzel-themed  birthday when I was four!</p>
+                                <p>I used to watch the movie on trips to and from Birigui.</p>
                             </div>
                         </div>
-
-                        <div class="col-12 col-md-6 lantern-item">
-                            <div class="lantern">
-                                <span>Growing up, I was surrounded by strong women, like my mother and my godmother, who inspired me to dream without limits</span>
-                                <img src="img/women.jpg" alt="A photo of my mom and my godmother on my 3th birthday"/>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-6 lantern-item">
-                            <div class="lantern">
-                                <img src="img/childhood.jpg" alt="A photo of me, my brother, my cousins, and my godmother on the bus">
-                                <span>I always spent my vacations and weekends in Birigui, a countryside town in São Paulo, Brazil, with my mother's family, so I grew up with my brother and cousins</span>                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-6 lantern-item">
-                            <div class="lantern">
-                                <span>Even though he passed away young due to cancer, my grandfather showed me that caring for others isn't about grand gestures, but about the little things in everyday life</span>
-                                <img src="img/grandpa.JPG" alt="A photo of me, and my grandpa putting together a a puzzle">
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-6 lantern-item">
-                            <div class="lantern">
-                                <span>School has always been my second home, even though it changed several times before it got a name: SESI, the place where I discovered my love for technology</span>
-                            </div>
-                        </div>
-
-                    </div>
+                    </details>
                 </div>
             </div>
-
         </section>
-        <section class="teste">
-            <p>hiiii</p>
+        <section class="journey-scene" id="home-kept-moving" aria-labelledby="childhood-journey-title" data-lantern-chapter="2">
+            <div class="journey-stage">
+                <div class="opening-sky" aria-hidden="true"></div>
+                <header class="journey-intro">
+                    <h3 id="childhood-journey-title">Home kept moving</h3>
+                    <p>Before I turned nine, I had already lived in several cities across São Paulo state. Moving usually meant changing schools, meeting new classmates, and getting used to another routine.</p>
+                </header>
+                <div class="journey-route">
+                    <svg class="journey-trail journey-trail-wide" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <path class="journey-trail-base" d="M165 65 C270 -10 390 140 500 65 S740 -10 835 65 C1020 170 990 330 835 365 S610 445 500 365 S280 285 165 365"/>
+                        <path class="journey-trail-light" pathLength="1" d="M165 65 C270 -10 390 140 500 65 S740 -10 835 65 C1020 170 990 330 835 365 S610 445 500 365 S280 285 165 365"/>
+                    </svg>
+                    <svg class="journey-trail journey-trail-narrow" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <path class="journey-trail-base" d="M50 75 C35 135 65 185 50 245 S35 365 50 415 S65 535 50 585 S35 705 50 755 S65 865 50 925"/>
+                        <path class="journey-trail-light" pathLength="1" d="M50 75 C35 135 65 185 50 245 S35 365 50 415 S65 535 50 585 S35 705 50 755 S65 865 50 925"/>
+                    </svg>
+                    <span class="sky-lantern journey-guide" aria-hidden="true"></span>
+                    <ol class="childhood-stops" role="list" aria-label="Childhood move photo sequence">
+                        <li class="childhood-stop"><figure><!-- PHOTO · Childhood photograph from Campinas -->
+<div class="asset-placeholder photo-slot"><img src="img/childhood-campinas.jpeg" alt="A young child walking toward a pigeon in a paved square" loading="lazy" decoding="async" width="671" height="676" style="object-fit: contain; object-position: 50% 50%;"></div><figcaption>Campinas</figcaption></figure></li>
+                        <li class="childhood-stop"><figure><!-- PHOTO · Childhood photograph from Bauru -->
+<div class="asset-placeholder photo-slot"><img src="img/childhood-bauru.jpeg" alt="A smiling young child holding a doll beside a sofa" loading="lazy" decoding="async" width="1600" height="1200" style="object-fit: contain; object-position: 50% 50%;"></div><figcaption>Bauru</figcaption></figure></li>
+                        <li class="childhood-stop"><figure><!-- PHOTO · Childhood photograph from Piratininga to be added -->
+<div class="asset-placeholder photo-slot"><img src="img/childhood-piratininga.jpg" alt="Luísa standing in a garden beside a flowering tree" loading="lazy" decoding="async" width="3264" height="2448" style="object-fit: contain; object-position: 50% 50%;"></div><figcaption>Piratininga</figcaption></figure></li>
+                        <li class="childhood-stop"><figure class="returning-home"><!-- PHOTO · Childhood photograph from Birigui to be added -->
+<div class="asset-placeholder photo-slot"><img src="img/childhood-birigui-first.jpg" alt="Young Luísa with relatives gathered together indoors" loading="lazy" decoding="async" width="2592" height="1456" style="object-fit: contain; object-position: 50% 50%;"></div><figcaption>Birigui</figcaption></figure></li>
+                        <li class="childhood-stop"><figure><!-- PHOTO · Childhood photograph from Tupi Paulista to be added -->
+<div class="asset-placeholder photo-slot"><img src="img/childhood-tupi-paulista.JPG" alt="Luísa wearing a colorful dress and carrying a small bag" loading="lazy" decoding="async" width="2448" height="3264" style="object-fit: contain; object-position: 50% 50%;"></div><figcaption>Tupi Paulista</figcaption></figure></li>
+                        <li class="childhood-stop"><figure class="returning-home"><!-- PHOTO · Another childhood photograph from Birigui to be added -->
+<div class="asset-placeholder photo-slot"><img src="img/childhood-birigui-return.jpg" alt="Luísa and another girl standing together" loading="lazy" decoding="async" width="2448" height="3264" style="object-fit: contain; object-position: 50% 50%;"></div><figcaption>Birigui, again</figcaption></figure></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <section class="family-scene" id="people-who-made-it-home" aria-labelledby="family-album-title" data-lantern-chapter="3">
+            <div class="family-stage">
+                <div class="opening-sky" aria-hidden="true"></div>
+                <header class="family-album-intro">
+                    <h3 id="family-album-title">The People Who Made It Home</h3>
+                </header>
+                <div class="family-album">
+                    <svg class="family-album-thread" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <path d="M160 100 C440 -30 540 250 870 130 S1120 420 850 470 S380 280 280 450"/>
+                    </svg>
+                    <div class="family-album-lights" aria-hidden="true">
+                        <span class="sky-lantern family-album-light family-album-light-1"></span>
+                        <span class="sky-lantern family-album-light family-album-light-2"></span>
+                        <span class="sky-lantern family-album-light family-album-light-3"></span>
+                    </div>
+                    <figure class="family-entry family-album-mom" data-family-memory>
+                        <div class="family-album-print">
+                            <div class="family-album-placeholder photo-slot"><img src="img/childhood-mom.JPG" alt="Young Luísa and her mother sitting together on a bed" loading="lazy" decoding="async" width="3264" height="2448" style="object-fit: contain; object-position: 50% 50%;"></div>
+                        </div>
+                        <figcaption>
+                            <h4 id="mom-title">Mãe Aline (mom)</h4>
+                            <p>She was the one that understood me when I was little and helped me to learn to read and write: now she still calls me <span lang="pt-BR">tracinha</span>, her little bookworm.</p>
+                        </figcaption>
+                    </figure>
+                    <figure class="family-entry family-album-godmother" data-family-memory>
+                        <div class="family-album-print">
+                            <img src="img/women.JPG" width="3264" height="2448" alt="Luísa's mother and godmother at her third birthday" loading="lazy" decoding="async">
+                            <details class="family-album-more"><summary>Another photograph</summary>
+                                <img src="img/childhood-godmom.JPG" alt="Luísa and her godmother smiling with a younger child" loading="lazy" decoding="async" width="480" height="640" style="object-fit: contain; object-position: 50% 50%;">
+                            </details>
+                        </div>
+                        <figcaption>
+                            <h4 id="godmother-title">Dinda Helô (godmother)</h4>
+                            <p>Dinda has always been a second mother to me. She's also part of the reason pink has been around me for as long as I can remember.</p>
+                        </figcaption>
+                    </figure>
+                    <figure class="family-entry family-album-grandpa" data-family-memory>
+                        <div class="family-album-print">
+                            <img src="img/grandpa.JPG" width="3264" height="2448" alt="Luísa and her grandfather assembling a princess puzzle" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption>
+                            <h4>Vovô Di (grandpa)</h4>
+                            <p>When I was around six, I used to assemble princess puzzles with my grandpa at the dining table.</p>
+                        </figcaption>
+                    </figure>
+                    <figure class="family-entry family-album-birigui" data-family-memory>
+                        <div class="family-album-print">
+                            <img src="img/childhood.jpg" width="1280" height="960" alt="Luísa with her brother, cousins, and godmother on a bus" loading="lazy" decoding="async">
+                        </div>
+                        <figcaption>
+                            <h4>Birigui, a familiar place to return to</h4>
+                            <p>My grandparents, cousins, and much of my mother's family were in Birigui, so I used to spend all my vacations there.</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        <div class="lantern-final-chapters" id="lanterns-remaining">
+            <section class="lantern-reading-scene lesson-scene" id="lulis-classroom" aria-labelledby="lesson-title" data-lantern-chapter="4">
+                <div class="lantern-reading-stage">
+                    <div class="opening-sky lesson-lights" aria-hidden="true">
+                        <span class="sky-lantern chapter-lantern chapter-lantern-1"></span>
+                        <span class="sky-lantern chapter-lantern chapter-lantern-2"></span>
+                    </div>
+                    <div class="lantern-reading-content">
+                        <header class="lantern-chapter-heading">
+                            <h3 id="lesson-title">Luli's classroom</h3>
+                        </header>
+                        <div class="lesson-composition">
+                            <div class="lesson-sheet">
+                                <dl>
+                                    <div><dt>Teacher</dt><dd>Luísa</dd></div>
+                                    <div><dt>Student</dt><dd>My younger brother (Enzo), four years younger</dd></div>
+                                    <div><dt>Classroom</dt><dd>The living-room door</dd></div>
+                                    <div><dt>Subject</dt><dd>Whatever I had learned that day</dd></div>
+                                </dl>
+                                <svg class="lesson-annotation" viewBox="0 0 460 35" aria-hidden="true" focusable="false">
+                                    <path pathLength="1" d="M4 20 Q105 8 215 18 T450 16"/>
+                                </svg>
+                                <p>Our house was rented, so I put sheets of paper on the living-room door and used them to teach my younger brother. Most of the lessons were just things I'd learned at school and wanted to explain again.</p>
+                            </div>
+                            <figure class="lesson-door">
+                                <!-- PHOTO · Sibling photo of Luísa and her younger brother to be added -->
+                                <div class="asset-placeholder photo-slot"><img src="img/childhood-brother.jpg" alt="Young Luísa standing beside her younger brother" loading="lazy" decoding="async" width="1456" height="2592" style="object-fit: contain; object-position: 50% 50%;"></div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="lantern-reading-scene stayed-scene" id="the-place-where-i-stayed" aria-labelledby="stayed-title" data-lantern-chapter="5">
+                <div class="lantern-reading-stage">
+                    <div class="opening-sky stayed-lights" aria-hidden="true">
+                        <span class="sky-lantern chapter-lantern chapter-lantern-1"></span>
+                        <span class="sky-lantern chapter-lantern chapter-lantern-2"></span>
+                        <span class="sky-lantern chapter-lantern chapter-lantern-3"></span>
+                    </div>
+                    <div class="lantern-reading-content">
+                        <header class="lantern-chapter-heading">
+                            <h3 id="stayed-title">The Place Where I Stayed</h3>
+                        </header>
+                        <div class="stayed-composition">
+                            <div class="stayed-photographs">
+                                <!-- PHOTO · Early photograph of Luísa at SESI to be added -->
+                                <div class="asset-placeholder stayed-photo-main photo-slot"><img src="img/childhood-sesi-first.jpeg" alt="Students in school uniform posing together on stairs" loading="lazy" decoding="async" width="960" height="1280" style="object-fit: contain; object-position: 50% 50%;"></div>
+                                <!-- PHOTO · Optional photograph of Luísa and her mother at SESI to be added -->
+                                <div class="asset-placeholder stayed-photo-secondary photo-slot"><img src="img/childhood-sesi-mom.jpg" alt="Luísa and her mother smiling together" loading="lazy" decoding="async" width="1944" height="2592" style="object-fit: contain; object-position: 50% 50%;"></div>
+                            </div>
+                            <div class="stayed-copy">
+                                <p>When I was nine, I placed fifth in the SESI entrance exam after missing one question. And it became the first school where I studied for more than a year.</p>
+                                <p>There, between a lot of classes, I found <cite>Run Marco</cite> and got fascinated by programming and robotics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </div>
+        <section class="robotics-section" id="robotics" aria-labelledby="robotics-title">
+            <div class="robotics-transition" aria-hidden="true"></div>
+
+            <header class="robotics-story-intro robotics-content-width">
+                <div class="robotics-intro-main">
+                    <div class="robotics-intro-heading">
+                        <p class="robotics-kicker">FIRST LEGO League</p>
+                        <h2 id="robotics-title">Hally Team <span>Robotics Team</span></h2>
+                        <p>FIRST LEGO League (FLL) is an international robotics competition where students design and program LEGO robots to complete missions and develop innovative solutions to real-world problems. Each season brings a new theme, combining research, technology, and teamwork.</p>
+                        <p>I joined Hally Team in September 2021 and, over the next three years, I explored different sides of robotics, including building, programming, researching, presentations, social campaigns, and activities to share the values of robotics with other students at our school.</p>
+                        <p>In 2024, I also had the opportunity to mentor another team preparing for their own competition.</p>
+                    </div>
+                    <div class="robotics-intro-photos" aria-label="Hally Team photography">
+                        <!-- ROBOTICS - Main team photograph -->
+                        <div class="robotics-photo-placeholder robotics-team-photo photo-slot">
+                            <img src="img/robotics-team-main.jpg" alt="The robotics team posing together in their team shirts at school" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="720">
+                        </div>
+                        <!-- PHOTO · Secondary robotics team photograph to be added -->
+                        <div class="robotics-photo-placeholder robotics-team-photo-small photo-slot">
+                            <img src="img/robotics-team-secondary.jpg" alt="Luísa sitting in front of a school trophy cabinet" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1200" height="1600">
+                        </div>
+                    </div>
+                </div>
+                <div class="robotics-memory-row" aria-label="The beginning of Luísa's robotics story">
+                    <button class="robotics-memory" type="button" aria-expanded="false">
+                        <span class="robotics-memory-caption">September 2021: a robotics practice on my birthday.</span>
+                        <span class="robotics-photo-placeholder photo-slot"><img src="img/robotics-birthday.jpg" alt="Luísa beside a birthday cake and a robotics team banner" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="1200"></span>
+                    </button>
+                    <button class="robotics-memory" type="button" aria-expanded="false">
+                        <span class="robotics-memory-caption">Our first team picture</span>
+                        <span class="robotics-photo-placeholder photo-slot"><img src="img/robotics-halley-first-photo.jpg" alt="The robotics team posing with a long box in the school courtyard" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1024" height="576"></span>
+                    </button>
+                    <button class="robotics-memory" type="button" aria-expanded="false">
+                        <span class="robotics-memory-caption">Raquel, Sarah, and me: the Golden Trio.</span>
+                        <span class="robotics-photo-placeholder photo-slot"><img src="img/robotics-golden-trio.jpeg" alt="Luísa, Sarah and Raquel posing together in their robotics shirts" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1080" height="1077"></span>
+                    </button>
+                    <button class="robotics-memory" type="button" aria-expanded="false">
+                        <span class="robotics-memory-caption">May 2022: our first in-person tournament in São Paulo.</span>
+                        <span class="robotics-photo-placeholder photo-slot"><img src="img/robotics-first-in-person.jpg" alt="Robotics teammates leaning over the camera in a circle" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1200" height="1600"></span>
+                    </button>
+                </div>
+            </header>
+
+            <section class="robotics-selector robotics-content-width section-scroll-safe" id="robotics-roles" aria-label="Robotics character and project selector" data-robotics-selector>
+                <div class="robotics-selector-grid">
+                    <article class="character-select" aria-live="polite">
+                        <div class="selector-toolbar">
+                            <button class="selector-arrow" type="button" data-selector-previous aria-label="Show previous robotics role">←</button>
+                            <p data-character-position>01 / 04</p>
+                            <button class="selector-arrow" type="button" data-selector-next aria-label="Show next robotics role">→</button>
+                        </div>
+                        <div class="robotics-photo-placeholder character-photo photo-slot" data-character-photo>
+                            <img src="img/robotics-lu-researcher.jpg" alt="Luísa wearing her robotics team shirt and medals by the waterfront" loading="lazy" decoding="async" style="object-fit: cover; object-position: 50% 44%;" width="1944" height="2592">
+                        </div>
+                        <div class="character-copy">
+                            <h4 data-character-title>Lu Researcher</h4>
+                            <p class="robotics-eyebrow" data-character-season>Season to add</p>
+                            <p data-character-copy>I worked on the team's research project.</p>
+                            <p class="character-proof" data-character-proof hidden></p>
+                        </div>
+                    </article>
+
+                    <article class="season-project" aria-live="polite">
+                        <div class="project-heading">
+                            <p class="robotics-eyebrow" data-project-season>Season details to add</p>
+                            <h4 data-project-title>SIRV</h4>
+                        </div>
+                        <div class="project-media">
+                            <div class="robotics-photo-placeholder project-photo photo-slot" data-project-photo>                            
+                                <img src="img/robotics-sirv-main.JPG" alt="SIRV refrigerated transport prototype with a white lid and blue container" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="4032" height="2268">
+                            </div>
+                            <div class="project-context">
+                                <ul class="project-labels" data-project-labels aria-label="Project areas">
+                                    <li>Research</li><li>Robotics</li><li>Social Impact</li>
+                                </ul>
+                                <dl class="project-summary project-summary-side">
+                                    <div><dt data-project-problem-label>Problem</dt><dd data-project-problem>Exact project detail to add.</dd></div>
+                                </dl>
+                                <div class="project-evidence" data-project-evidence aria-label="Project visual evidence"></div>
+                            </div>
+                        </div>
+                        <div class="project-followup">
+                            <dl class="project-summary project-summary-below">
+                                <div><dt data-project-solution-label>Built</dt><dd data-project-solution>Exact project detail to add.</dd></div>
+                            </dl>
+                            <div class="project-actions" data-project-links aria-label="Project links"></div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="robotics-journey robotics-content-width section-scroll-safe" id="robotics-journey" aria-labelledby="journey-title" data-robotics-timeline>
+                <div class="robotics-journey-heading">
+                    <p class="robotics-eyebrow">September 2021 to 2024</p>
+                    <h3 id="journey-title">The robotics journey</h3>
+                </div>
+                <div class="journey-experience">
+                    <div class="journey-track-wrap">
+                        <ol class="journey-track" aria-label="Robotics milestones">
+                            <li><button class="journey-stop is-active" data-media-for="robotics-timeline-1" type="button" data-date="Sep 2021" data-title="Joined FLL"  aria-pressed="true"><time datetime="2021-09">Sep 2021</time><span>Joined FLL</span></button></li>
+                            <li><button class="journey-stop" data-media-for="robotics-timeline-2" type="button" data-date="Jan 2022" data-title="Global Innovation Awards"  aria-pressed="false"><time datetime="2022-01">Jan 2022</time><span>Global Innovation Awards</span></button></li>
+                            <li><button class="journey-stop" data-media-for="robotics-timeline-3" type="button" data-date="May 2022" data-title="National, São Paulo"  aria-pressed="false"><time datetime="2022-05">May 2022</time><span>National, São Paulo</span></button></li>
+                            <li><button class="journey-stop" data-media-for="robotics-timeline-4" type="button" data-date="Aug 2022" data-title="International, Rio de Janeiro"  aria-pressed="false"><time datetime="2022-08">Aug 2022</time><span>International, Rio</span></button></li>
+                            <li><button class="journey-stop" data-media-for="robotics-timeline-5" type="button" data-date="Mar 2023" data-title="National, Brasília" aria-pressed="false"><time datetime="2023-03">Mar 2023</time><span>National, Brasília</span></button></li>
+                            <li><button class="journey-stop" data-media-for="robotics-timeline-6" type="button" data-date="2024" data-title="Mentored OBR N1" aria-pressed="false"><time datetime="2024">2024</time><span>Mentored OBR N1</span></button></li>
+                        </ol>
+                    </div>
+                    <div class="journey-preview" aria-live="polite">
+                        <!-- PHOTO · Photo from joining FLL to be added -->
+                        <div class="robotics-photo-placeholder journey-preview-photo photo-slot" data-timeline-photo><span role="img" aria-label="Photo from joining FLL to be added">Milestone photo</span></div>
+                        <div><p class="robotics-eyebrow" data-timeline-date>Sep 2021</p><h4 data-timeline-title>Joined FLL</h4><p data-timeline-caption>I joined the team.</p></div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="tocando-section" aria-labelledby="tocando-title">
+            <header class="tocando-opening tocando-content-width section-scroll-safe" id="tocando">
+                <div class="tocando-intro-grid">
+                    <div class="tocando-intro-copy">
+                        <p class="tocando-kicker">Tocando em Frente · Since 2022</p>
+                        <h2 id="tocando-title">Tocando em Frente</h2>
+                        <p class="tocando-description">Tocando em Frente (TEF) is a Brazilian youth-led nonprofit organization that works to expand educational opportunities for public school students. Through volunteer-led projects, workshops, and educational materials, we help students explore new interests and discover opportunities they might not otherwise have access to.</p>
+                        <div class="tocando-links" data-tocando-links aria-label="Official Tocando em Frente links"></div>
+                        <dl class="tocando-metrics" data-tocando-metrics aria-label="Tocando em Frente impact metrics"></dl>
+                    </div>
+                    <div class="tocando-intro-photos" aria-label="Tocando em Frente photography">
+                        <!-- PHOTO · Main Tocando em Frente photograph to be added -->
+                        <div class="tocando-photo-placeholder tocando-main-photo photo-slot"><img src="img/tef-main.jpg" alt="Tocando em Frente participants posing together beneath the organization's banner" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="852"></div>
+                        <!-- PHOTO · Secondary Tocando em Frente photograph to be added -->
+                        <div class="tocando-photo-placeholder tocando-accent-photo photo-slot"><img src="img/tef-secundary.jpg" alt="Tocando em Frente participants posing together in a classroom" loading="lazy" decoding="async" width="1600" height="1200" style="object-fit: contain; object-position: 50% 50%;"></div>
+                    </div>
+                </div>
+
+                <ol class="tocando-role-path" data-tocando-roles aria-label="Luísa's role progression at Tocando em Frente"></ol>
+
+                <div class="tocando-memory-row" aria-label="Tocando em Frente memories">
+                    <button class="tocando-memory" type="button" aria-expanded="false">
+                        <span class="tocando-memory-copy"><small>April 2022 · Rotational Trainee</small><strong>I applied even that I was 13</strong><span> and the minimum age was 14</span></span>
+                        <!-- PHOTO · Photo from Luísa's Tocando em Frente application period to be added -->
+                        <span class="tocando-photo-placeholder photo-slot"><img src="img/tef-application-2022.jpg" alt="Participants and a chat panel in an online Tocando em Frente meeting" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="511"></span>
+                    </button>
+                    <button class="tocando-memory" type="button" aria-expanded="false">
+                        <span class="tocando-memory-copy"><small>Creating "passaports"</small><strong>English &amp; Exchange</strong><span>Helping make English and international opportunities easier to understand for public-school students</span></span>
+                        <!-- PHOTO · Photo of the early English and Exchange workbook to be added -->
+                        <span class="tocando-photo-placeholder photo-slot"><img src="img/tef-english-exchange-workbook.png" alt="Cover of the English and Exchange workbook designed as a blue passport" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1414" height="2000"></span>
+                    </button>
+                    <button class="tocando-memory" type="button" aria-expanded="false">
+                        <span class="tocando-memory-copy"><small>From one classroom to another</small><strong>School outreach</strong><span>Sharing educational opportunities with students in other classrooms</span></span>
+                        <!-- PHOTO · Photo of Luísa sharing her robotics experience with students to be added -->
+                        <span class="tocando-photo-placeholder photo-slot"><img src="img/tef-school-outreach.png" alt="Students in a classroom watching an outreach presentation" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1195" height="807"></span>
+                    </button>
+                    <button class="tocando-memory" type="button" aria-expanded="false">
+                        <span class="tocando-memory-copy"><small>2025 · Institutional Team</small><strong>Working with volunteers.</strong><span>Meeting volunteers from other cities in person for the first time</span></span>
+                        <!-- PHOTO · Current Tocando em Frente community and Institutional Team photograph to be added -->
+                        <span class="tocando-photo-placeholder photo-slot"><img src="img/tef-institutional-team-2025.jpeg" alt="Tocando em Frente participants posing together at an event" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="960"></span>
+                    </button>
+                </div>
+            </header>
+
+            <section class="tocando-recognition tocando-content-width section-scroll-safe" id="recognized-impact" aria-labelledby="recognition-title" data-recognition-timeline>
+                <div class="tocando-section-heading">
+                    <p class="tocando-kicker">Visibility · Grants · Certifications · Awards</p>
+                    <h3 id="recognition-title">Recognized impact.</h3>
+                </div>
+                <div class="recognition-experience">
+                    <ol class="recognition-track" data-recognition-track aria-label="Tocando em Frente recognitions"></ol>
+                    <article class="recognition-preview" data-recognition-preview aria-live="polite">
+                        <div class="recognition-mark" data-recognition-logo role="img" aria-label="Recognition logo"></div>
+                        <div>
+                            <h4 data-recognition-title>UNICEF</h4>
+                            <p class="recognition-type" data-recognition-context>International presentation / participation</p>
+                            <a data-recognition-link href="" target="_blank" rel="noopener noreferrer" hidden>Learn more <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </article>
+                </div>
+                <a class="recognition-archive-link" data-recognition-archive href="" target="_blank" rel="noopener noreferrer" hidden>More recognitions &amp; updates → TeF LinkedIn <span aria-hidden="true">↗</span></a>
+            </section>
+
+            <section class="tocando-projects tocando-content-width section-scroll-safe" id="creating-opportunities" aria-labelledby="projects-title">
+                <div class="tocando-section-heading">
+                    <p class="tocando-kicker">Management through selected projects</p>
+                    <h3 id="projects-title">Creating opportunities.</h3>
+                </div>
+                <div class="tef-project-carousel" data-tef-project-carousel aria-roledescription="carousel" aria-label="Selected Tocando em Frente projects">
+                    <div class="tef-project-toolbar"><p data-tef-project-counter>01 / 03</p><div><button type="button" data-tef-project-previous aria-label="Show previous Tocando em Frente project">←</button><button type="button" data-tef-project-next aria-label="Show next Tocando em Frente project">→</button></div></div>
+                    <div class="tef-project-layout">
+                        <div class="tef-project-visuals"><figure class="tef-project-main-media" data-tef-project-main-media></figure><div class="tef-project-thumbnails" data-tef-project-thumbnails aria-label="Choose project media"></div></div>
+                        <article class="tef-project-context"><p class="tocando-project-label" data-tef-project-type></p><h4 data-tef-project-title></h4><p data-tef-project-summary></p><ul data-tef-project-proofs aria-label="Project proof points"></ul><div class="tef-project-links" data-tef-project-links></div></article>
+                    </div>
+                    <p class="visually-hidden" data-tef-project-status aria-live="polite"></p>
+                </div>
+            </section>
+        </section>
+
+        <section class="school-voice-section" aria-labelledby="school-voice-title">
+            <header class="school-voice-opening school-content-width section-scroll-safe" id="school-voice">
+                <div class="question-chat-overlay" data-question-chat aria-hidden="true">
+                    <div class="question-chat" data-question-messages role="status" aria-live="polite"></div>
+                </div>
+                <div class="question-transition">
+                    <div><p class="school-kicker">School voice · Student-led spaces</p><h2 id="school-voice-title">Making room for students' voices.</h2></div>
+                </div>
+
+                <div class="school-voice-carousel" data-school-carousel aria-roledescription="carousel" aria-label="Student-led school projects">
+                    <div class="school-carousel-toolbar">
+                        <p data-school-counter>01 / 05</p>
+                        <div><button type="button" data-school-previous aria-label="Show previous school project">←</button><button type="button" data-school-next aria-label="Show next school project">→</button></div>
+                    </div>
+                    <article class="school-carousel-slide">
+                        <header class="school-slide-heading"><p class="school-kicker" data-school-eyebrow></p><h3 data-school-title></h3><p class="school-subtitle" data-school-subtitle></p></header>
+                        <div class="school-media-grid school-carousel-media" data-school-media aria-label="Selected school project media"></div>
+                        <div class="school-slide-evidence"><ul class="school-inline-meta" data-school-impact-pills aria-label="Project impact"></ul><p class="school-project-statement" data-school-caption></p><div class="school-slide-links" data-school-links></div></div>
+                    </article>
+                    <p class="visually-hidden" data-school-status aria-live="polite"></p>
+                </div>
+            </header>
+        </section>
+
+        <section class="systems-section section-scroll-safe" id="systems" aria-labelledby="systems-title">
+            <div class="systems-content-width">
+                <header class="systems-heading">
+                    <h2 id="systems-title">Systems beyond tech: people.</h2>
+                    <p>I enjoy working out why a program behaves the way it does: how information moves through it, what happens after someone clicks a button, and whether the result makes sense. In my technical course, I also started thinking more about the people who would use what we were building.</p>
+                </header>
+
+                <div class="systems-carousel" data-systems-carousel aria-roledescription="carousel" aria-label="Selected systems projects">
+                    <div class="systems-toolbar">
+                        <p class="systems-counter" data-system-counter>01 / 05</p>
+                        <div class="systems-controls">
+                            <button type="button" data-system-previous aria-label="Show previous project"><span aria-hidden="true">&#8592;</span></button>
+                            <button type="button" data-system-next aria-label="Show next project"><span aria-hidden="true">&#8594;</span></button>
+                        </div>
+                    </div>
+
+                    <div class="systems-stage">
+                        <div class="systems-media" data-system-media aria-label="Selected project media"></div>
+                        <article class="systems-context" data-system-context>
+                            <p class="systems-project-context" data-system-company></p>
+                            <h3 data-system-title></h3>
+                            <p class="systems-descriptor" data-system-descriptor></p>
+                            <dl class="systems-details">
+                                <div><dt>People / problem</dt><dd data-system-problem></dd></div>
+                                <div><dt>What we built</dt><dd data-system-solution></dd></div>
+                                <div><dt></dt><dd data-system-role></dd></div>
+                                <div data-system-result-row><dt>Result</dt><dd data-system-result></dd></div>
+                            </dl>
+                            <ul class="systems-tags" data-system-technologies aria-label="Project technologies"></ul>
+                            <div class="systems-links" data-system-links></div>
+                        </article>
+                    </div>
+
+                    <div class="systems-navigation">
+                        <div class="systems-progress" aria-hidden="true"><span data-system-progress></span></div>
+                        <div class="systems-dots" data-system-dots aria-label="Choose a systems project"></div>
+                    </div>
+                    <p class="visually-hidden" data-system-status aria-live="polite"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="theater-section section-scroll-safe" id="theater" aria-labelledby="theater-title">
+            <div class="theater-content-width">
+                <header class="theater-heading">
+                    <p class="theater-kicker">Theater</p>
+                    <h2 id="theater-title"><span>Off-screen?</span><span>On stage.</span></h2>
+                </header>
+
+                <div class="theater-carousel" data-theater-carousel aria-roledescription="carousel" aria-label="Theater productions">
+                    <div class="theater-toolbar">
+                        <p data-theater-counter>01 / 02</p>
+                        <div class="theater-controls">
+                            <button type="button" data-theater-previous aria-label="Show previous theater production"><span aria-hidden="true">&#8592;</span></button>
+                            <button type="button" data-theater-next aria-label="Show next theater production"><span aria-hidden="true">&#8594;</span></button>
+                        </div>
+                    </div>
+
+                    <div class="theater-layout">
+                        <div class="theater-visuals">
+                            <figure class="theater-main-media" data-theater-main-media></figure>
+                            <div class="theater-thumbnails" data-theater-thumbnails aria-label="Choose production media"></div>
+                        </div>
+                        <article class="theater-context">
+                            <p class="theater-year" data-theater-year></p>
+                            <h3 data-theater-production-title></h3>
+                            <p class="theater-subtitle" data-theater-subtitle></p>
+                            <p class="theater-role" data-theater-role></p>
+                            <ul data-theater-involvement aria-label="Luísa's involvement"></ul>
+                            <p class="theater-audience" data-theater-audience hidden></p>
+                            <p class="theater-short-context" data-theater-short-context></p>
+                        </article>
+                    </div>
+                    <p class="visually-hidden" data-theater-status aria-live="polite"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="awards-section section-scroll-safe" id="milestones" aria-labelledby="awards-title">
+            <div class="awards-content-width">
+                <header class="awards-heading">
+                    <p>Recognition · Competitions · Olympiads</p>
+                    <h2 id="awards-title">A few milestones along the way.</h2>
+                </header>
+
+                <div class="awards-timeline" data-awards-timeline aria-label="Recognition timeline by year"></div>
+            </div>
+        </section>
+
+        <section class="curious-section section-scroll-safe" id="currently-curious" aria-labelledby="curious-title">
+            <div class="curious-content-width">
+                <header class="curious-heading">
+                    <h2 id="curious-title">Currently curious about...</h2>
+                    <p>Some questions stay with me longer than the projects that first made me ask them. Here are a few I'm still thinking about.</p>
+                </header>
+                <div class="curious-questions" data-curious-questions aria-label="Questions Luísa is currently exploring"></div>
+            </div>
+        </section>
+
+        <section class="closing-section section-scroll-safe" id="closing" aria-labelledby="closing-title">
+            <div class="closing-content-width">
+                <div class="closing-question-space">
+                    <div class="closing-question-copy">
+                        <button class="closing-question-trigger" type="button" id="closing-title" data-closing-trigger aria-expanded="false" aria-controls="final-question">
+                            Can I ask you one last question?
+                        </button>
+                        <div class="closing-question-reveal" id="final-question" data-final-question aria-hidden="true" inert role="status" aria-live="polite">
+                            <p><span data-final-question-text aria-hidden="true"></span><span class="closing-caret" aria-hidden="true"></span><span class="visually-hidden" data-final-question-announcement></span></p>
+                        </div>
+                    </div>
+                    <div class="closing-photo-bubbles" data-closing-photo-bubbles aria-label="Personal photo placeholders"></div>
+                </div>
+
+                <footer class="portfolio-footer">
+                    <nav class="portfolio-footer-links" data-portfolio-footer-links aria-label="Contact links"></nav>
+                    <div class="portfolio-footer-notes">
+                        <p>Thanks for exploring my story.</p>
+                        <p data-portfolio-footer-identity></p>
+                    </div>
+                </footer>
+            </div>
         </section>
 
     </main>
-</body>
 
-<script src="js/script.js"></script>
+    <div class="luli-drawer-overlay" data-luli-drawer hidden>
+        <section class="luli-drawer" id="luli-drawer" role="dialog" aria-modal="true" aria-labelledby="luli-drawer-title">
+            <header class="luli-drawer-heading">
+                <div>
+                    <h2 id="luli-drawer-title">Luli’s Shelf</h2>
+                </div>
+                <button class="luli-drawer-close" type="button" data-luli-drawer-close aria-label="Close Luli’s Shelf">×</button>
+            </header>
+            <div class="luli-drawer-shelves" data-luli-drawer-items aria-label="Personal memory objects"></div>
+            <article class="luli-drawer-detail" data-luli-drawer-detail aria-live="polite">
+                <div class="luli-drawer-media" data-luli-drawer-media></div>
+                <div>
+                    <p class="luli-drawer-detail-label">A little more about this</p>
+                    <h3 data-luli-drawer-detail-title></h3>
+                    <p data-luli-drawer-detail-memory></p>
+                    <a data-luli-drawer-detail-link href="" target="_blank" rel="noopener noreferrer" hidden></a>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <!-- MEDIA LIBRARY · Replace the contents of a template with an img or video.
+         Keep data-media-for unchanged. Captions and controls stay with their component.
+         Images outside the first screen should use loading="lazy".
+         Videos may use src or source children, controls, and a poster attribute. -->
+    <!-- ROBOTICS · Researcher · Character photograph -->
+    <template data-media-for="robotics-researcher-character">
+        <img src="img/robotics-lu-researcher.jpg" alt="Luísa wearing her robotics team shirt and medals by the waterfront" loading="lazy" decoding="async" style="object-fit: cover; object-position: 50% 44%;" width="1944" height="2592">
+    </template>
+
+    <!-- ROBOTICS · SIRV · Main photograph -->
+    <template data-media-for="robotics-researcher-main">
+        <img src="img/robotics-sirv-main.JPG" alt="SIRV refrigerated transport prototype with a white lid and blue container" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="4032" height="2268">
+    </template>
+
+    <!-- ROBOTICS · SIRV · Comet Method -->
+    <template data-media-for="robotics-researcher-evidence-1">
+        <img src="img/robotics-sirv-comet-method.png" alt="Comet Method diagram showing the stages of the team's research process" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="2000" height="1414">
+    </template>
+
+    <!-- ROBOTICS · SIRV · UEM -->
+    <template data-media-for="robotics-researcher-evidence-2">
+        <img src="img/robotics-sirv-uem.jpg" alt="Online research meeting with a university participant and two team members" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="544">
+    </template>
+
+    <!-- ROBOTICS · SIRV · Doctors Without Borders -->
+    <template data-media-for="robotics-researcher-evidence-3">
+        <img src="img/robotics-sirv-doctors-without-borders.jpg" alt="Video call with team members and participants in the Doctors Without Borders exchange" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="659">
+    </template>
+
+    <!-- ROBOTICS · Robot Operator · Character photograph -->
+    <template data-media-for="robotics-robot-operator-character">
+        <img src="img/robotics-lu-operator.jpg" alt="Luísa taking a selfie beside the robot competition field" loading="lazy" decoding="async" style="object-fit: cover; object-position: 43% 45%;" width="4608" height="3456">
+    </template>
+
+    <!-- ROBOTICS · SHOWVE · Main photograph -->
+    <template data-media-for="robotics-robot-operator-main">
+        <img src="img/robotics-showve-main.jpg" alt="SHOWVE electronics enclosure with a blue display on the front" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="720">
+    </template>
+
+    <!-- ROBOTICS · SHOWVE · Energy testing -->
+    <template data-media-for="robotics-robot-operator-evidence-1">
+        <img src="img/robotics-showve-energy-testing.png" alt="Collage of SHOWVE prototypes, wiring and electronic components" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1920" height="1080">
+    </template>
+
+    <!-- ROBOTICS · SHOWVE · SENAI testing -->
+    <template data-media-for="robotics-robot-operator-evidence-2">
+        <img src="img/robotics-showve-senai-testing.png" alt="Collage of technicians working with laboratory testing equipment at SENAI" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1920" height="1080">
+    </template>
+
+    <!-- ROBOTICS · SHOWVE · Interface / testing -->
+    <template data-media-for="robotics-robot-operator-evidence-3">
+        <img src="img/robotics-showve-demo.jpeg" alt="SHOWVE prototype mounted beside a shower head" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="1204">
+    </template>
+
+    <!-- ROBOTICS · Programmer · Character photograph -->
+    <template data-media-for="robotics-programmer-character">
+        <img src="img/robotics-lu-programmer.jpg" alt="Luísa with glasses sitting beside a coach window" loading="lazy" decoding="async" style="object-fit: cover; object-position: 35% 50%;" width="2304" height="1728">
+    </template>
+
+    <!-- ROBOTICS · DRAWSE · Main photograph -->
+    <template data-media-for="robotics-programmer-main">
+        <img src="img/robotics-drawse-main.jpeg" alt="Hands demonstrating the DRAWSE phone case with an LED matrix and circuit board" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="1200">
+    </template>
+
+    <!-- ROBOTICS · DRAWSE · Bluetooth -->
+    <template data-media-for="robotics-programmer-evidence-1">
+        <img src="img/robotics-drawse-showing.jpeg" alt="Luísa and two other people beside an auditorium doorway" loading="lazy" decoding="async" width="1200" height="1600" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- ROBOTICS · DRAWSE · ESP32 -->
+    <template data-media-for="robotics-programmer-evidence-2">
+        <img src="img/robotics-drawse-circuit.jpeg" alt="Hands holding a phone and the DRAWSE LED matrix circuit" loading="lazy" decoding="async" width="1280" height="960" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- ROBOTICS · DRAWSE · 8 versions -->
+    <template data-media-for="robotics-programmer-evidence-3">
+        <strong>8 versions</strong><span>DRAWSE version comparison to add.</span>
+    </template>
+
+    <!-- ROBOTICS · DRAWSE · 4 test types -->
+    <template data-media-for="robotics-programmer-evidence-4">
+        <strong>4 test types</strong><span>DRAWSE testing media to add.</span>
+    </template>
+
+    <!-- ROBOTICS · Mentor · Character photograph -->
+    <template data-media-for="robotics-mentor-character">
+        <img src="img/robotics-lu-mentor.jpg" alt="Luísa smiling for a selfie" loading="lazy" decoding="async" width="4608" height="2072" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- ROBOTICS · INOVA Team · OBR N1 · Main photograph -->
+    <template data-media-for="robotics-mentor-main">
+        <span role="img" aria-label="INOVA team or robot photograph to be added">INOVA team or robot photograph to add</span>
+    </template>
+
+    <!-- ROBOTICS · INOVA Team · OBR N1 · Team photo -->
+    <template data-media-for="robotics-mentor-evidence-1">
+        <span role="img" aria-label="INOVA team photograph to be added">INOVA team photograph to add</span>
+    </template>
+
+    <!-- ROBOTICS · INOVA Team · OBR N1 · Robot photo -->
+    <template data-media-for="robotics-mentor-evidence-2">
+        <strong>Robot photo</strong><span>OBR robot photo to add.</span>
+    </template>
+
+    <!-- ROBOTICS · INOVA Team · OBR N1 · Robot video -->
+    <template data-media-for="robotics-mentor-evidence-3">
+        <strong>Robot video</strong><span>OBR robot video and poster to add.</span>
+    </template>
+
+    <!-- ROBOTICS · INOVA Team · OBR N1 · Spike -->
+    <template data-media-for="robotics-mentor-evidence-4">
+        <img src="img/robotics-inova-robot-me-and-my-brother.jpg" alt="Luísa and her brother smiling for a selfie" loading="lazy" decoding="async" width="4608" height="2072" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- ROBOTICS · INOVA Team · OBR N1 · Gearboxes -->
+    <template data-media-for="robotics-mentor-evidence-5">
+        <strong>Gearboxes</strong><span>Gearbox mentoring visual to add.</span>
+    </template>
+
+    <!-- ROBOTICS TIMELINE · Joined FLL -->
+    <template data-media-for="robotics-timeline-1">
+        <img src="img/robotics-halley-first-photo.jpg" alt="The robotics team posing together with a long box in the school courtyard" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1024" height="576">
+    </template>
+
+    <!-- ROBOTICS TIMELINE · Global Innovation Awards -->
+    <template data-media-for="robotics-timeline-2">
+        <img src="img/robotics-timeline-gia-2022.jpg" alt="Grid of participants in an online Global Innovation Awards meeting" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="720">
+    </template>
+
+    <!-- ROBOTICS TIMELINE · National, São Paulo -->
+    <template data-media-for="robotics-timeline-3">
+        <img src="img/robotics-timeline-national-sp-2022.jpg" alt="Team selfie at the São Paulo robotics tournament" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="900">
+    </template>
+
+    <!-- ROBOTICS TIMELINE · International, Rio de Janeiro -->
+    <template data-media-for="robotics-timeline-4">
+        <img src="img/robotics-timeline-international-rio-2022.jpg" alt="Robotics teammates posing behind large Robotics Open lettering at a tournament" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="900">
+    </template>
+
+    <!-- ROBOTICS TIMELINE · National, Brasília -->
+    <template data-media-for="robotics-timeline-5">
+        <img src="img/robotics-timeline-national-brasilia-2023.jpg" alt="Team selfie with spectators in the stands at the Brasília robotics tournament" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="900">
+    </template>
+
+    <!-- ROBOTICS TIMELINE · Mentored OBR N1 -->
+    <template data-media-for="robotics-timeline-6">
+        <span role="img" aria-label="Photograph of the INOVA mentoring milestone to be added">INOVA mentoring photograph to add</span>
+    </template>
+
+    <!-- TOCANDO RECOGNITION · UNICEF · Logo or photograph -->
+    <template data-media-for="tocando-recognition-1">
+        <img src="img/tef-logo-unicef.png" alt="UNICEF logo" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="400" height="400">
+    </template>
+
+    <!-- TOCANDO RECOGNITION · Changes for Humanity · Logo or photograph -->
+    <template data-media-for="tocando-recognition-2">
+        <img src="img/tef-logo-changes-for-humanity.png" alt="Changes for Humanity logo" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="447" height="447">
+    </template>
+
+    <!-- TOCANDO RECOGNITION · SESI ODS · Logo or photograph -->
+    <template data-media-for="tocando-recognition-3">
+        <img src="img/tef-logo-sesi-ods.jpg" alt="SESI ODS certification logo marked 2022" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="768" height="768">
+    </template>
+
+    <!-- TOCANDO RECOGNITION · Prêmio LED · Logo or photograph -->
+    <template data-media-for="tocando-recognition-4">
+        <img src="img/tef-logo-premio-led.jpg" alt="Prêmio LED Luz na Educação logo" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="825" height="470">
+    </template>
+
+    <!-- TOCANDO · HackaTocando · HackaTocando event (image) -->
+    <template data-media-for="tocando-hackatocando-1">
+        <img src="img/tocando__hackatocando__01__convite-edicao-2025.png" alt="HackaTocando 2025 invitation with colorful stars on a blue background" loading="lazy" decoding="async" width="1447" height="2048">
+    </template>
+
+    <!-- TOCANDO · HackaTocando · Planning (image) -->
+    <template data-media-for="tocando-hackatocando-2">
+        <img src="img/tocando__hackatocando__02__cecilia-cruz-monitoramento-prevencao.png" alt="HackaTocando poster: Cecília Cruz, Monitoramento e prevenção" loading="lazy" decoding="async" width="1080" height="1920">
+    </template>
+
+    <!-- TOCANDO · HackaTocando · Event video (video) -->
+    <template data-media-for="tocando-hackatocando-3">
+        <img src="img/tocando__hackatocando__03__renan-ferreirinha-monitoramento-prevencao.png" alt="HackaTocando poster: Renan Ferreirinha, Monitoramento e prevenção" loading="lazy" decoding="async" width="1080" height="1920">
+    </template>
+
+    <!-- TOCANDO · CineTocando · CineTocando event (image) -->
+<template data-media-for="tocando-hackatocando-4">
+        <img src="img/tocando__hackatocando__04__felipe-soares-engajamento-juvenil.png" alt="HackaTocando poster: Felipe Soares, Engajamento juvenil" loading="lazy" decoding="async" width="1080" height="1920">
+    </template>
+<template data-media-for="tocando-hackatocando-5">
+        <img src="img/tocando__hackatocando__05__arthur-engajamento-juvenil.png" alt="HackaTocando poster: Arthur Potratz, Engajamento juvenil" loading="lazy" decoding="async" width="1080" height="1920">
+    </template>
+    <template data-media-for="tocando-cinetocando-1">
+        <img class="media-banner" src="img/tocando__cinetocando__01__capa-do-evento.png" alt="CineTocando event cover with blue silhouettes and yellow lettering" loading="lazy" decoding="async" width="1600" height="400">
+    </template>
+
+    <!-- TOCANDO · CineTocando · Showcase (image) -->
+    <template data-media-for="tocando-cinetocando-2">
+        <img src="img/tocando__cinetocando__02__janialecia-lopes-cinema-de-gambiarra.png" alt="CineTocando poster: Janialécia Lopes, Cinema de gambiarra" loading="lazy" decoding="async" width="1080" height="1350">
+    </template>
+
+    <!-- TOCANDO · CineTocando · Event video (video) -->
+    <template data-media-for="tocando-cinetocando-3">
+        <img src="img/tocando__cinetocando__03__flavia-marcelino-filme-em-casa.png" alt="CineTocando poster: Flávia Marcelino, Fazendo meu filme em casa" loading="lazy" decoding="async" width="1080" height="1350">
+    </template>
+
+    <!-- TOCANDO · Prêmio Sonho · Prêmio Sonho (image) -->
+    <template data-media-for="tocando-premio-sonho-1">
+        <img src="img/tef-premio-sonho-main.png" alt="Prêmio Sonho 2025 graphic displayed on a dark background" loading="lazy" decoding="async" width="1910" height="944" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- TOCANDO · Prêmio Sonho · Nominations (image) -->
+    <template data-media-for="tocando-premio-sonho-2">
+        <img src="img/tef-premio-sonho-invite.jpeg" alt="Prêmio Sonho invitation message displayed on a phone" loading="lazy" decoding="async" width="732" height="1280" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- TOCANDO · Prêmio Sonho · Celebration (video) -->
+    <template data-media-for="tocando-premio-sonho-3">
+        <span class="tef-media-placeholder" role="img" aria-label="Prêmio Sonho video to be added">Celebration video to add</span>
+    </template>
+
+    <!-- SCHOOL · ACOLHIDA SENAI · STUDENTS TALKING TO STUDENTS. (image) -->
+    <template data-media-for="school-acolhida-senai-1">
+        <span role="img" aria-label="Students participating in Acolhida SENAI to be added">STUDENTS TALKING TO STUDENTS. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · ACOLHIDA SENAI · ASK US ANYTHING. (image) -->
+    <template data-media-for="school-acolhida-senai-2">
+        <span role="img" aria-label="Acolhida SENAI open question and answer moment to be added">ASK US ANYTHING. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · ACOLHIDA SENAI · ACOLHIDA IN MOTION. (video) -->
+    <template data-media-for="school-acolhida-senai-3">
+        <span role="img" aria-label="Acolhida SENAI event video to be added">ACOLHIDA IN MOTION. video + poster to add</span>
+    </template>
+
+    <!-- SCHOOL · WORKSHOP ESCOLA ATIVA · OPPORTUNITIES, SIDE BY SIDE. (image) -->
+    <template data-media-for="school-workshop-escola-ativa-1">
+        <span role="img" aria-label="Workshop Escola Ativa presentation to be added">OPPORTUNITIES, SIDE BY SIDE. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · WORKSHOP ESCOLA ATIVA · SUPERINTENDENT VISIT. (image) -->
+    <template data-media-for="school-workshop-escola-ativa-2">
+        <img src="img/school-workshop-superintendent.jpeg" alt="Students and adults posing together on an auditorium stage" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1280" height="663">
+    </template>
+
+    <!-- SCHOOL · WORKSHOP ESCOLA ATIVA · SHOWING, NOT EXPLAINING. (video) -->
+    <template data-media-for="school-workshop-escola-ativa-3">
+        <video controls playsinline preload="metadata" aria-label="Mini Model United Nations simulation during Workshop Escola Ativa"><source src="img/school-workshop-mun-video.mp4" type="video/mp4"></video>
+    </template>
+
+    <!-- SCHOOL · SESI MUN · IN THE ROOM. (image) -->
+    <template data-media-for="school-sesi-mun-1">
+        <img src="img/school-mun-explanation.jpeg" alt="A speaker addressing students seated at classroom tables" loading="lazy" decoding="async" width="1200" height="1600" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- SCHOOL · SESI MUN · RESTRUCTURING. (image) -->
+    <template data-media-for="school-sesi-mun-2">
+        <span role="img" aria-label="SESI MUN restructuring work to be added">RESTRUCTURING. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · SESI MUN · THE DEBATE. (video) -->
+    <template data-media-for="school-sesi-mun-3">
+        <span role="img" aria-label="SESI MUN debate video to be added">THE DEBATE. video + poster to add</span>
+    </template>
+
+    <!-- SCHOOL · STUDENT COUNCIL · STUDENT REPRESENTATION. (image) -->
+    <template data-media-for="school-student-council-1">
+        <span role="img" aria-label="Student Council leadership photograph to be added">STUDENT REPRESENTATION. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · STUDENT COUNCIL · AUTISM AWARENESS. (image) -->
+    <template data-media-for="school-student-council-2">
+        <span role="img" aria-label="Autism awareness campaign at school to be added">AUTISM AWARENESS. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · STUDENT COUNCIL · DOWN SYNDROME AWARENESS. (image) -->
+    <template data-media-for="school-student-council-3">
+        <span role="img" aria-label="Down syndrome awareness campaign at school to be added">DOWN SYNDROME AWARENESS. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · SCHOOL RADIO · WRITING THE SCHOOL'S VOICE. (image) -->
+    <template data-media-for="school-school-radio-1">
+        <span role="img" aria-label="School Radio script screenshot to be added">WRITING THE SCHOOL'S VOICE. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · SCHOOL RADIO · ON AIR. (image) -->
+    <template data-media-for="school-school-radio-2">
+        <span role="img" aria-label="School Radio recording or broadcast visual to be added">ON AIR. photo to add</span>
+    </template>
+
+    <!-- SCHOOL · SCHOOL RADIO · FOUR EDITIONS. (video) -->
+    <template data-media-for="school-school-radio-3">
+        <span role="img" aria-label="School Radio audio or video excerpt to be added">FOUR EDITIONS. video + poster to add</span>
+    </template>
+
+    <!-- SYSTEMS · PetCarinho · PetCarinho interface or team photo (image) -->
+    <template data-media-for="systems-petcarinho-1">
+        <img src="img/systems-petcarinho-main.png" alt="PetCarinho website interface with pink navigation, a dog photograph and service information" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1892" height="1075">
+    </template>
+
+    <!-- SYSTEMS · PetCarinho · PetCarinho demo video (video) -->
+    <template data-media-for="systems-petcarinho-2">
+        <video controls playsinline preload="metadata" aria-label="PetCarinho demonstration"><source src="img/systems-petcarinho-demo.mp4" type="video/mp4"></video>
+    </template>
+
+    <!-- SYSTEMS · Doar+ · Doar+ platform visual (image) -->
+    <template data-media-for="systems-doar-mais-1">
+        <img src="img/systems-doar-mais-main.png" alt="Doar+ platform screens displayed on a desktop monitor and a phone" loading="lazy" decoding="async" width="965" height="856" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- SYSTEMS · Doar+ · Doar+ demo video (video) -->
+    <template data-media-for="systems-doar-mais-2">
+        <video controls playsinline preload="metadata" aria-label="Doar+ demonstration"><source src="img/systems-doar-mais-demo.mp4" type="video/mp4"></video>
+    </template>
+
+    <!-- SYSTEMS · MAIA · Vaga Certa · MAIA prototype or pitch photo (image) -->
+    <template data-media-for="systems-maia-1">
+        <img src="img/systems-maia-main.png" alt="MAIA application and WhatsApp conversation interface mockups" loading="lazy" decoding="async" width="1920" height="1080" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+    <template data-media-for="systems-maia-3">
+        <img src="img/systems-maia-pitch.jpg" alt="Luísa and teammates presenting a project beside a projected business model" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1156" height="651">
+    </template>
+
+    <!-- SYSTEMS · MAIA · Vaga Certa · MAIA pitch video (video) -->
+    <template data-media-for="systems-maia-2">
+        <video controls playsinline preload="metadata" aria-label="MAIA demonstration"><source src="img/systems-maia-demo.mp4" type="video/mp4"></video>
+    </template>
+
+    <!-- SYSTEMS · Pé no Estoque · Pé no Estoque prototype or team photo (image) -->
+    <template data-media-for="systems-pe-no-estoque-1">
+        <img src="img/systems-pe-no-estoque-main.png" alt="Pé no Estoque dashboard and phone interface mockups" loading="lazy" decoding="async" width="1920" height="1080" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- SYSTEMS · Pé no Estoque · Pé no Estoque pitch video (video) -->
+    <template data-media-for="systems-pe-no-estoque-2">
+        <video controls playsinline preload="metadata" aria-label="Pé no Estoque demonstration"><source src="img/systems-pe-no-estoque-demo.mp4" type="video/mp4"></video>
+    </template>
+
+    <!-- SYSTEMS · Constituere · Constituere Figma or product screens (image) -->
+    <template data-media-for="systems-constituere-1">
+        <span class="systems-media-label">Constituere Figma or product screens</span>
+    </template>
+
+    <!-- SYSTEMS · Constituere · Constituere prototype or demo video (video) -->
+    <template data-media-for="systems-constituere-2">
+        <span class="systems-media-label">Constituere prototype or demo video</span>
+    </template>
+
+    <!-- THEATER · Amar dá drama · On stage. (image) -->
+    <template data-media-for="theater-shakespeare-1">
+        <img src="img/theater-amar-queen-main.jpg" alt="Luísa taking a mirror photograph in costume and stage makeup" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="3072" height="4080">
+    </template>
+
+    <!-- THEATER · Amar dá drama · Backstage. (image) -->
+    <template data-media-for="theater-shakespeare-2">
+        <img src="img/theater-amar-backstage.jpeg" alt="Luísa performing on a dark stage in a black costume" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="738" height="1600">
+    </template>
+
+    <!-- THEATER · Amar dá drama · Rehearsal. (image) -->
+    <template data-media-for="theater-shakespeare-3">
+        Photo to add
+    </template>
+
+    <!-- THEATER · Amar dá drama · Scenography. (image) -->
+    <template data-media-for="theater-shakespeare-4">
+        Photo to add
+    </template>
+
+    <!-- THEATER · Amar dá drama · Characterization. (image) -->
+    <template data-media-for="theater-shakespeare-5">
+        Photo to add
+    </template>
+
+    <!-- THEATER · Amar dá drama · Script. (image) -->
+    <template data-media-for="theater-shakespeare-6">
+        Photo to add
+    </template>
+
+    <!-- THEATER · Amar dá drama · On stage. (video) -->
+    <template data-media-for="theater-shakespeare-7">
+        Video + poster to add
+    </template>
+
+    <!-- THEATER · As Pérolas de Dona Maria · On stage. (image) -->
+    <template data-media-for="theater-belas-artes-senai-1">
+        Photo to add
+    </template>
+
+    <!-- THEATER · As Pérolas de Dona Maria · Backstage. (image) -->
+    <template data-media-for="theater-belas-artes-senai-2">
+        Photo to add
+    </template>
+
+    <!-- THEATER · As Pérolas de Dona Maria · Rehearsal. (image) -->
+    <template data-media-for="theater-belas-artes-senai-3">
+        Photo to add
+    </template>
+
+    <!-- THEATER · As Pérolas de Dona Maria · Cast. (image) -->
+    <template data-media-for="theater-belas-artes-senai-4">
+        Photo to add
+    </template>
+
+    <!-- THEATER · As Pérolas de Dona Maria · The process. (image) -->
+    <template data-media-for="theater-belas-artes-senai-5">
+        Photo to add
+    </template>
+
+    <!-- THEATER · As Pérolas de Dona Maria · On stage. (video) -->
+    <template data-media-for="theater-belas-artes-senai-6">
+        Video + poster to add
+    </template>
+
+
+    <!-- THEATER · Amar dá drama · With my teacher -->
+    <template data-media-for="theater-shakespeare-8">
+        <img src="img/theater-amar-my-teacher.jpeg" alt="Theater performers and their teacher together on stage" loading="lazy" decoding="async" width="1200" height="1600" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- MILESTONES · FIRST LEGO League · FLL National Championship photo / document (image) -->
+    <template data-media-for="milestones-fll-national-2022-1">
+        <img src="img/award-fll-national-2022.jpg" alt="The Halley robotics team celebrating in front of a first-place Champions Award banner" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1292" height="859">
+    </template>
+
+    <!-- MILESTONES · FIRST LEGO League · FLL National Championship video (video) -->
+    <template data-media-for="milestones-fll-national-2022-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · FIRST LEGO League · FLL Alliance Challenge photo / document (image) -->
+    <template data-media-for="milestones-fll-alliance-2022-1">
+        Evidence image to add
+    </template>
+
+    <!-- MILESTONES · FIRST LEGO League · FLL Alliance Challenge video (video) -->
+    <template data-media-for="milestones-fll-alliance-2022-2">
+        <video controls playsinline preload="metadata" aria-label="FLL Alliance Challenge 2022 video"><source src="img/award-fll-alliance-2022-video.mp4" type="video/mp4"></video>
+    </template>
+
+    <!-- MILESTONES · FIRST LEGO League · FLL International Championship photo / document (image) -->
+    <template data-media-for="milestones-fll-international-2022-1">
+        <img src="img/award-fll-international-2022.jpg" alt="The robotics team on stage beneath a Champions Award winner announcement" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="750" height="500">
+    </template>
+
+    <!-- MILESTONES · FIRST LEGO League · FLL International Championship video (video) -->
+    <template data-media-for="milestones-fll-international-2022-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · Robot Performance Champion · SESI FLL Robotics Tournament · Robot Performance Championship photo / document (image) -->
+    <template data-media-for="milestones-robot-performance-2023-1">
+        <img src="img/award-robot-performance-2023.jpg" alt="Robotics teammates celebrating together with a trophy" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="900">
+    </template>
+
+    <!-- MILESTONES · Robot Performance Champion · SESI FLL Robotics Tournament · Robot Performance Championship video (video) -->
+    <template data-media-for="milestones-robot-performance-2023-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · Brazilian Astronomy and Astronautics Olympiad (OBA) · OBA Gold Medal photo / document (image) -->
+    <template data-media-for="milestones-oba-2023-1">
+        <img src="img/award-oba-2023.jpg" alt="Certificate for Luísa's gold medal in the 2023 Brazilian Astronomy and Astronautics Olympiad" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="9742" height="6888">
+    </template>
+
+    <!-- MILESTONES · Brazilian Astronomy and Astronautics Olympiad (OBA) · OBA Gold Medal video (video) -->
+    <template data-media-for="milestones-oba-2023-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · IJB Essay Contest · IJB Essay Contest photo / document (image) -->
+    <template data-media-for="milestones-ijb-2023-1">
+        <img src="img/award-ijb-2023.jpeg" alt="Certamen Munews II certificate bearing Luísa Michelin Riqueti's name" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="1131">
+    </template>
+
+    <!-- MILESTONES · IJB Essay Contest · IJB Essay Contest video (video) -->
+    <template data-media-for="milestones-ijb-2023-2">
+        <img src="img/award-ijb-2023-print.png" alt="Munews publication featuring a committee idea about Percy Jackson" loading="lazy" decoding="async" width="1240" height="853" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- MILESTONES · International Kangaroo Mathematics Contest · Kangaroo Mathematics Bronze Medals photo / document (image) -->
+    <template data-media-for="milestones-kangaroo-2024-1">
+        <img src="img/award-kangaroo-2024.jpg" alt="Bronze medal certificate for Luísa in the 2024 Kangaroo Mathematics contest" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%; transform: rotate(180deg);" width="9742" height="7084">
+    </template>
+
+    <!-- MILESTONES · International Kangaroo Mathematics Contest · Kangaroo Mathematics Bronze Medals video (video) -->
+    <template data-media-for="milestones-kangaroo-2024-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · International Kangaroo Mathematics Contest · Kangaroo Mathematics Bronze Medals photo / document (image) -->
+    <template data-media-for="milestones-kangaroo-2025-1">
+        Evidence image to add
+    </template>
+
+    <!-- MILESTONES · International Kangaroo Mathematics Contest · Kangaroo Mathematics Bronze Medals video (video) -->
+    <template data-media-for="milestones-kangaroo-2025-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · International Olympiad Mathématiques Sans Frontières · Brazilian Selection · Mathématiques Sans Frontières Silver Medal photo / document (image) -->
+    <!-- Pending: award-msf-2023.jpg documents a separate 2023 bronze medal; keep the 2025 evidence slot unfilled. -->
+    <template data-media-for="milestones-msf-2025-1">
+        <img src="img/award-msf-2025.jpg" alt="Certificate awarding Luísa a national silver medal in Mathématiques sans Frontières in 2025" loading="lazy" decoding="async" width="3508" height="2481" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- MILESTONES · International Olympiad Mathématiques Sans Frontières · Brazilian Selection · Mathématiques Sans Frontières Silver Medal video (video) -->
+    <template data-media-for="milestones-msf-2025-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · SENAI Ideas Challenge ON · Ideas Challenge ON photo / document (image) -->
+    <template data-media-for="milestones-ideas-on-2025-1">
+        <img src="img/award-ideas-on-2025.jpg" alt="Students and adults posing with an award after a project presentation" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="750" height="500">
+    </template>
+
+    <!-- MILESTONES · SENAI Ideas Challenge ON · Ideas Challenge ON video (video) -->
+    <template data-media-for="milestones-ideas-on-2025-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · Desafio de Ideias Presencial · Desafio de Ideias Presencial photo / document (image) -->
+    <template data-media-for="milestones-ideas-presencial-2025-1">
+        <img src="img/award-ideas-presencial-2025.jpg" alt="Five project team members wearing orange SENAI shirts" loading="lazy" decoding="async" width="1600" height="720" style="object-fit: contain; object-position: 50% 50%;">
+    </template>
+
+    <!-- MILESTONES · Desafio de Ideias Presencial · Desafio de Ideias Presencial video (video) -->
+    <template data-media-for="milestones-ideas-presencial-2025-2">
+        Video + poster to add
+    </template>
+
+    <!-- MILESTONES · OLITEF · National Treasury Olympiad · OLITEF recognition photo / document (image) -->
+    <template data-media-for="milestones-olitef-2025-1">
+        Evidence image to add
+    </template>
+
+    <!-- MILESTONES · OLITEF · National Treasury Olympiad · OLITEF recognition video (video) -->
+    <template data-media-for="milestones-olitef-2025-2">
+        Video + poster to add
+    </template>
+
+    <!-- SHELF · Tracinha · Handwritten note or childhood reading photograph (image) -->
+    <template data-media-for="shelf-tracinha-1">
+        <div class="luli-drawer-media-placeholder" role="img" aria-label="Handwritten note or childhood reading photograph">Tracinha media to add</div>
+    </template>
+
+    <!-- SHELF · Grandpa &amp; me · Luísa and her grandfather assembling a princess puzzle (image) -->
+    <template data-media-for="shelf-grandpa-puzzle-1">
+        <img style="object-fit: contain;" src="img/grandpa.JPG" alt="Luísa and her grandfather assembling a princess puzzle" loading="lazy" width="3264" height="2448">
+    </template>
+
+    <!-- SHELF · Crostoli · Crostoli family tradition photograph (image) -->
+    <template data-media-for="shelf-crostoli-1">
+        <div class="luli-drawer-media-placeholder" role="img" aria-label="Crostoli family tradition photograph">Crostoli media to add</div>
+    </template>
+
+    <!-- SHELF · Copacabana. In jeans. · Luísa visiting Copacabana during a robotics trip (image) -->
+    <template data-media-for="shelf-copacabana-jeans-1">
+        <img src="img/shelf-copacabana-jeans.jpg" alt="Luísa and robotics teammates posing together on the Copacabana promenade" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1600" height="900">
+    </template>
+
+    <!-- SHELF · Languages · Language notebook or vocabulary cards (image) -->
+    <template data-media-for="shelf-languages-1">
+        <div class="luli-drawer-media-placeholder" role="img" aria-label="Language notebook or vocabulary cards">Languages media to add</div>
+    </template>
+
+    <!-- SHELF · Why pink? · Luísa's mother and godmother at her third birthday (image) -->
+    <template data-media-for="shelf-why-pink-1">
+        <img style="object-fit: contain;" src="img/women.JPG" alt="Luísa's mother and godmother at her third birthday" loading="lazy" width="3264" height="2448">
+    </template>
+
+    <!-- SHELF · The Golden Trio · Luísa, Raquel, and Sarah together at robotics (image) -->
+    <template data-media-for="shelf-golden-trio-1">
+        <img src="img/robotics-golden-trio.jpeg" alt="Luísa, Sarah and Raquel posing together in their robotics shirts" loading="lazy" decoding="async" style="object-fit: contain; object-position: 50% 50%;" width="1080" height="1077">
+    </template>
+
+    <!-- CLOSING · Personal photograph 1 -->
+    <template data-media-for="closing-1">
+        <img src="img/closing-coffee.jpg" alt="A cup of coffee on a saucer at a café table" loading="lazy" decoding="async" style="object-fit: cover; object-position: 42% 55%;" width="4080" height="1836">
+    </template>
+
+    <!-- CLOSING · Personal photograph 2 -->
+    <template data-media-for="closing-2">
+        <img src="img/closing-everyday.jpg" alt="Luísa smiling with writing and small drawings on her face" loading="lazy" decoding="async" style="object-fit: cover; object-position: 45% 45%;" width="4608" height="2072">
+    </template>
+
+    <!-- CLOSING · Personal photograph 3 -->
+    <template data-media-for="closing-3">
+        <img src="img/closing-history.jpg" alt="Museum hall with a central staircase, statues and framed paintings" loading="lazy" decoding="async" style="object-fit: cover; object-position: 50% 50%;" width="3264" height="1468">
+    </template>
+
+    <!-- CLOSING · Personal photograph 4 -->
+    <template data-media-for="closing-4">
+        <img src="img/closing-ipe.jpeg" alt="A flowering tree beside a residential street" loading="lazy" decoding="async" width="576" height="1280" style="object-fit: cover; object-position: 50% 48%;">
+    </template>
+
+    <!-- CLOSING · Personal photograph 5 -->
+    <template data-media-for="closing-5">
+        <img src="img/closing-sp.jpeg" alt="View from a balcony over trees, tiled roofs and neighboring buildings" loading="lazy" decoding="async" width="575" height="1280" style="object-fit: cover; object-position: 50% 55%;">
+    </template>
+
+<script src="js/script.js?v=20261112-11" onerror="clearTimeout(window.introFallback); document.documentElement.classList.remove('intro-pending')"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
 
+
+</body>
 </html>
+
